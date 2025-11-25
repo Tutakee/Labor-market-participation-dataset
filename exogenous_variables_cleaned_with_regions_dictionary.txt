@@ -24,9 +24,9 @@ Value counts:
   No: 443
 
 
-partner_work_hours
+respondent_work_hours
 ----------------------------------------
-Description: Partner's weekly work hours (numeric midpoint)
+Description: Respondent's weekly work hours (numeric midpoint)
 Type: float64
 Missing: 30 (3.1%)
 Non-missing: 938
@@ -36,9 +36,9 @@ Min: 0.0
 Max: 55.0
 
 
-partner_work_hours_cat
+respondent_work_hours_cat
 ----------------------------------------
-Description: Partner's weekly work hours (categorical)
+Description: Respondent's weekly work hours (categorical)
 Type: object
 Missing: 30 (3.1%)
 Non-missing: 938
@@ -421,40 +421,46 @@ Value counts:
 population_density
 ----------------------------------------
 Description: Population density (inhabitants per km²)
-Type: object
+Type: float64
 Missing: 85 (8.8%)
 Non-missing: 883
-Unique values: 269
+Mean: 1084.98
+Std: 1225.46
+Min: 31.0
+Max: 4777.0
 
 
 is_rural
 ----------------------------------------
 Description: Rural area indicator (1=Rural, 0=Not rural)
-Type: object
+Type: float64
 Missing: 85 (8.8%)
 Non-missing: 883
-Unique values: 2
-Value counts:
-  0: 684
-  1: 199
+Mean: 0.23
+Std: 0.42
+Min: 0.0
+Max: 1.0
 
 
 population
 ----------------------------------------
 Description: Total population in the region
-Type: object
+Type: float64
 Missing: 85 (8.8%)
 Non-missing: 883
-Unique values: 337
+Mean: 494121.41
+Std: 813836.27
+Min: 4459.0
+Max: 3669491.0
 
 
 is_metropolitan
 ----------------------------------------
 Description: Metropolitan area indicator (1=Metropolitan, 0=Not metropolitan)
-Type: object
+Type: float64
 Missing: 85 (8.8%)
 Non-missing: 883
-Unique values: 2
-Value counts:
-  0: 699
-  1: 184
+Mean: 0.21
+Std: 0.41
+Min: 0.0
+Max: 1.0

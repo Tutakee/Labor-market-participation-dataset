@@ -162,8 +162,8 @@ def update_data_dictionary(df, output_file):
     var_descriptions = {
         'ResponseId': 'Unique survey response identifier',
         'lives_with_others': 'Lives with others in household (Yes/No)',
-        'partner_work_hours': 'Partner\'s weekly work hours (numeric midpoint)',
-        'partner_work_hours_cat': 'Partner\'s weekly work hours (categorical)',
+        'respondent_work_hours': 'Respondent\'s weekly work hours (numeric midpoint)',
+        'respondent_work_hours_cat': 'Respondent\'s weekly work hours (categorical)',
         'num_children': 'Number of children in household (0 if living alone)',
         'num_partners': 'Number of partners in household (0 if living alone)',
         'num_parents': 'Number of parents in household (0 if living alone)',

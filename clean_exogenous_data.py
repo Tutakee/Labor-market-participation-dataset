@@ -37,9 +37,9 @@ def clean_risk_tolerance(series):
     return series.apply(extract_number)
 
 
-def encode_partner_work_hours(series):
+def encode_respondent_work_hours(series):
     """
-    Encode Q179 (partner's work hours) to numeric ranges
+    Encode Q179 (respondent's work hours) to numeric ranges
     Returns midpoint of hour range for analysis
     """
     mapping = {
@@ -172,10 +172,10 @@ def clean_exogenous_dataset(input_file, output_file, original_data_file='Data_Wa
     print("\n3. Adding living situation indicator (Q1)...")
     df_clean['lives_with_others'] = q1_data.map({'Ja': 'Yes', 'Nein': 'No'})
 
-    # Clean partner work hours
-    print("\n4. Encoding partner work hours (Q179)...")
-    df_clean['partner_work_hours'] = encode_partner_work_hours(df['Q179'])
-    df_clean['partner_work_hours_cat'] = df['Q179']  # Keep original categories
+    # Clean respondent work hours
+    print("\n4. Encoding respondent work hours (Q179)...")
+    df_clean['respondent_work_hours'] = encode_respondent_work_hours(df['Q179'])
+    df_clean['respondent_work_hours_cat'] = df['Q179']  # Keep original categories
 
     # Clean household composition
     print("\n5. Processing household composition variables...")
@@ -289,8 +289,8 @@ def generate_data_dictionary(df, output_file):
     var_descriptions = {
         'ResponseId': 'Unique survey response identifier',
         'lives_with_others': 'Lives with others in household (Yes/No)',
-        'partner_work_hours': 'Partner\'s weekly work hours (numeric midpoint)',
-        'partner_work_hours_cat': 'Partner\'s weekly work hours (categorical)',
+        'respondent_work_hours': 'Respondent\'s weekly work hours (numeric midpoint)',
+        'respondent_work_hours_cat': 'Respondent\'s weekly work hours (categorical)',
         'num_children': 'Number of children in household (0 if living alone)',
         'num_partners': 'Number of partners in household (0 if living alone)',
         'num_parents': 'Number of parents in household (0 if living alone)',
