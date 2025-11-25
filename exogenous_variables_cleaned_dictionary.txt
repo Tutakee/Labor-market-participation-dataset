@@ -12,6 +12,18 @@ Non-missing: 968
 Unique values: 968
 
 
+lives_with_others
+----------------------------------------
+Description: Lives with others in household (Yes/No)
+Type: object
+Missing: 11 (1.1%)
+Non-missing: 957
+Unique values: 2
+Value counts:
+  Yes: 514
+  No: 443
+
+
 partner_work_hours
 ----------------------------------------
 Description: Partner's weekly work hours (numeric midpoint)
@@ -44,48 +56,48 @@ Value counts:
 
 num_children
 ----------------------------------------
-Description: Number of children in household
+Description: Number of children in household (0 if living alone)
 Type: float64
-Missing: 457 (47.2%)
-Non-missing: 511
-Mean: 0.61
-Std: 0.92
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.32
+Std: 0.74
 Min: 0.0
 Max: 5.0
 
 
 num_partners
 ----------------------------------------
-Description: Number of partners in household
+Description: Number of partners in household (0 if living alone)
 Type: float64
-Missing: 457 (47.2%)
-Non-missing: 511
-Mean: 0.85
-Std: 0.56
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.45
+Std: 0.59
 Min: 0.0
 Max: 5.0
 
 
 num_parents
 ----------------------------------------
-Description: Number of parents in household
+Description: Number of parents in household (0 if living alone)
 Type: float64
-Missing: 457 (47.2%)
-Non-missing: 511
-Mean: 0.16
-Std: 0.57
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.09
+Std: 0.43
 Min: 0.0
 Max: 5.0
 
 
 num_siblings
 ----------------------------------------
-Description: Number of siblings in household
+Description: Number of siblings in household (0 if living alone)
 Type: float64
-Missing: 457 (47.2%)
-Non-missing: 511
-Mean: 0.08
-Std: 0.45
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.05
+Std: 0.33
 Min: 0.0
 Max: 4.0
 

@@ -142,7 +142,7 @@ def calculate_bmi(height_cm, weight_kg):
     return bmi
 
 
-def clean_exogenous_dataset(input_file, output_file):
+def clean_exogenous_dataset(input_file, output_file, original_data_file='Data_Wave2 (1).csv'):
     """
     Main cleaning function - processes the entire dataset
     """
@@ -155,6 +155,12 @@ def clean_exogenous_dataset(input_file, output_file):
     df = pd.read_csv(input_file)
     print(f"   Loaded {df.shape[0]} observations, {df.shape[1]} variables")
 
+    # Load Q1 from original dataset to handle missing values properly
+    print("   Loading Q1 (living situation) from original dataset...")
+    df_original = pd.read_csv(original_data_file)
+    df_original_data = df_original.iloc[2:].reset_index(drop=True)
+    q1_data = df_original_data['Q1']
+
     # Create cleaned dataframe
     df_clean = pd.DataFrame()
 
@@ -162,20 +168,36 @@ def clean_exogenous_dataset(input_file, output_file):
     print("\n2. Preserving ID variable...")
     df_clean['ResponseId'] = df['ResponseId']
 
+    # Add living situation indicator
+    print("\n3. Adding living situation indicator (Q1)...")
+    df_clean['lives_with_others'] = q1_data.map({'Ja': 'Yes', 'Nein': 'No'})
+
     # Clean partner work hours
-    print("\n3. Encoding partner work hours (Q179)...")
+    print("\n4. Encoding partner work hours (Q179)...")
     df_clean['partner_work_hours'] = encode_partner_work_hours(df['Q179'])
     df_clean['partner_work_hours_cat'] = df['Q179']  # Keep original categories
 
     # Clean household composition
-    print("\n4. Processing household composition variables...")
+    print("\n5. Processing household composition variables...")
     df_clean['num_children'] = df['Q4_4']
     df_clean['num_partners'] = df['Q4_2']
     df_clean['num_parents'] = df['Q4_3']
     df_clean['num_siblings'] = df['Q4_5']
 
+    # Fix missing values for people living alone
+    print("   Fixing missing values: People living alone have 0 household members...")
+    lives_alone = q1_data == 'Nein'
+    df_clean.loc[lives_alone, 'num_children'] = df_clean.loc[lives_alone, 'num_children'].fillna(0)
+    df_clean.loc[lives_alone, 'num_partners'] = df_clean.loc[lives_alone, 'num_partners'].fillna(0)
+    df_clean.loc[lives_alone, 'num_parents'] = df_clean.loc[lives_alone, 'num_parents'].fillna(0)
+    df_clean.loc[lives_alone, 'num_siblings'] = df_clean.loc[lives_alone, 'num_siblings'].fillna(0)
+
+    before_fix = df['Q4_4'].isnull().sum()
+    after_fix = df_clean['num_children'].isnull().sum()
+    print(f"   Missing values reduced: {before_fix} → {after_fix} ({after_fix/len(df_clean)*100:.1f}%)")
+
     # Clean demographics
-    print("\n5. Processing demographic variables...")
+    print("\n6. Processing demographic variables...")
     df_clean['age'] = df['Q80_1']
     df_clean['gender'] = encode_gender(df['Q256'])
     df_clean['gender_code'] = df['Q256'].map({'Männlich': 1, 'Weiblich': 2, 'Divers': 3})
@@ -184,7 +206,7 @@ def clean_exogenous_dataset(input_file, output_file):
     df_clean['zip_code'] = df['Q120']
 
     # Clean vocational qualifications
-    print("\n6. Processing vocational qualifications (Q191)...")
+    print("\n7. Processing vocational qualifications (Q191)...")
     df_clean['vocational_qualification'] = df['Q191']
     # Create binary indicator for university degree
     df_clean['has_university_degree'] = df['Q191'].str.contains(
@@ -194,41 +216,41 @@ def clean_exogenous_dataset(input_file, output_file):
     ).astype(int)
 
     # Clean physical characteristics
-    print("\n7. Processing physical characteristics...")
+    print("\n8. Processing physical characteristics...")
     df_clean['height_cm'] = df['Q82_1']
     df_clean['weight_kg'] = df['Q83_1']
     df_clean['bmi'] = calculate_bmi(df['Q82_1'], df['Q83_1'])
 
     # Clean risk tolerance
-    print("\n8. Processing risk tolerance (Q84)...")
+    print("\n9. Processing risk tolerance (Q84)...")
     df_clean['risk_tolerance'] = clean_risk_tolerance(df['Q84'])
 
     # Clean work/income change variables
-    print("\n9. Processing work and income changes (Q219_3, Q219_4)...")
+    print("\n10. Processing work and income changes (Q219_3, Q219_4)...")
     df_clean['personal_income_change'] = encode_change_variables(df['Q219_3'])
     df_clean['partner_income_change'] = encode_change_variables(df['Q219_4'])
 
     # Clean household task division
-    print("\n10. Processing household task division (Q243_*)...")
+    print("\n11. Processing household task division (Q243_*)...")
     df_clean['task_share_food'] = df['Q243_1']  # % share: food shopping & preparation
     df_clean['task_share_childcare'] = df['Q243_2']  # % share: childcare
     df_clean['task_share_education'] = df['Q243_3']  # % share: children's education
     df_clean['task_share_housework'] = df['Q243_9']  # % share: housework
 
     # Clean health status
-    print("\n11. Processing health status (Q211)...")
+    print("\n12. Processing health status (Q211)...")
     df_clean['health_status'] = encode_health_status(df['Q211'])
     df_clean['health_status_cat'] = df['Q211']  # Keep original text
 
     # Clean income variables
-    print("\n12. Processing income variables (Q86, Q87)...")
+    print("\n13. Processing income variables (Q86, Q87)...")
     df_clean['household_income'] = parse_income_range(df['Q86'])
     df_clean['personal_income'] = parse_income_range(df['Q87'])
     df_clean['household_income_cat'] = df['Q86']  # Keep original categories
     df_clean['personal_income_cat'] = df['Q87']  # Keep original categories
 
     # Save cleaned data
-    print(f"\n13. Saving cleaned data to {output_file}...")
+    print(f"\n14. Saving cleaned data to {output_file}...")
     df_clean.to_csv(output_file, index=False)
 
     # Generate summary statistics
@@ -244,7 +266,7 @@ def clean_exogenous_dataset(input_file, output_file):
             print(f"  {var:30s}: {pct:5.1f}%")
 
     # Generate data dictionary
-    print("\n14. Generating data dictionary...")
+    print("\n15. Generating data dictionary...")
     generate_data_dictionary(df_clean, output_file.replace('.csv', '_dictionary.txt'))
 
     print("\n" + "=" * 80)
@@ -266,12 +288,13 @@ def generate_data_dictionary(df, output_file):
 
     var_descriptions = {
         'ResponseId': 'Unique survey response identifier',
+        'lives_with_others': 'Lives with others in household (Yes/No)',
         'partner_work_hours': 'Partner\'s weekly work hours (numeric midpoint)',
         'partner_work_hours_cat': 'Partner\'s weekly work hours (categorical)',
-        'num_children': 'Number of children in household',
-        'num_partners': 'Number of partners in household',
-        'num_parents': 'Number of parents in household',
-        'num_siblings': 'Number of siblings in household',
+        'num_children': 'Number of children in household (0 if living alone)',
+        'num_partners': 'Number of partners in household (0 if living alone)',
+        'num_parents': 'Number of parents in household (0 if living alone)',
+        'num_siblings': 'Number of siblings in household (0 if living alone)',
         'age': 'Respondent\'s age in years',
         'gender': 'Gender (Male/Female/Diverse)',
         'gender_code': 'Gender code (1=Male, 2=Female, 3=Diverse)',
