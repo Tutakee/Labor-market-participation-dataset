@@ -1,0 +1,388 @@
+================================================================================
+DATA DICTIONARY - Cleaned Exogenous Variables Dataset
+================================================================================
+
+
+ResponseId
+----------------------------------------
+Description: Unique survey response identifier
+Type: object
+Missing: 0 (0.0%)
+Non-missing: 968
+Unique values: 968
+
+
+lives_with_others
+----------------------------------------
+Description: Lives with others in household (Yes/No)
+Type: object
+Missing: 11 (1.1%)
+Non-missing: 957
+Unique values: 2
+Value counts:
+  Yes: 514
+  No: 443
+
+
+partner_work_hours
+----------------------------------------
+Description: Partner's weekly work hours (numeric midpoint)
+Type: float64
+Missing: 30 (3.1%)
+Non-missing: 938
+Mean: 22.08
+Std: 17.93
+Min: 0.0
+Max: 55.0
+
+
+partner_work_hours_cat
+----------------------------------------
+Description: Partner's weekly work hours (categorical)
+Type: object
+Missing: 30 (3.1%)
+Non-missing: 938
+Unique values: 8
+Value counts:
+  31-40 Stunden: 283
+  Nicht erwerbstätig: 261
+  41-50 Stunden: 127
+  21-30 Stunden: 90
+  11-20 Stunden: 75
+  1-10 Stunden: 60
+  0 Stunden: 22
+  Mehr als 50 Stunden: 20
+
+
+num_children
+----------------------------------------
+Description: Number of children in household (0 if living alone)
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.32
+Std: 0.74
+Min: 0.0
+Max: 5.0
+
+
+num_partners
+----------------------------------------
+Description: Number of partners in household (0 if living alone)
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.45
+Std: 0.59
+Min: 0.0
+Max: 5.0
+
+
+num_parents
+----------------------------------------
+Description: Number of parents in household (0 if living alone)
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.09
+Std: 0.43
+Min: 0.0
+Max: 5.0
+
+
+num_siblings
+----------------------------------------
+Description: Number of siblings in household (0 if living alone)
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 0.05
+Std: 0.33
+Min: 0.0
+Max: 4.0
+
+
+age
+----------------------------------------
+Description: Respondent's age in years
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 47.53
+Std: 14.03
+Min: 0.0
+Max: 100.0
+
+
+gender
+----------------------------------------
+Description: Gender (Male/Female/Diverse)
+Type: object
+Missing: 14 (1.4%)
+Non-missing: 954
+Unique values: 3
+Value counts:
+  Male: 491
+  Female: 458
+  Diverse: 5
+
+
+gender_code
+----------------------------------------
+Description: Gender code (1=Male, 2=Female, 3=Diverse)
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 1.49
+Std: 0.51
+Min: 1.0
+Max: 3.0
+
+
+education_level
+----------------------------------------
+Description: Education level (1=None to 4=Abitur)
+Type: float64
+Missing: 14 (1.4%)
+Non-missing: 954
+Mean: 3.38
+Std: 0.71
+Min: 1.0
+Max: 4.0
+
+
+education_cat
+----------------------------------------
+Description: Education level (categorical, German)
+Type: object
+Missing: 14 (1.4%)
+Non-missing: 954
+Unique values: 5
+Value counts:
+  Abitur oder Fachabitur (Höchster Schulabschluss/ Hochschulreife): 481
+  Mittleren Schulabschluss (z.B. Realschulabschluss): 298
+  Haupt- oder Volksschulabschluss (Abschluss der Pflichtschule): 110
+  Abschluss der Polytechnischen Oberschule der DDR: 60
+  Ohne allgemeinen Schulabschluss: 5
+
+
+zip_code
+----------------------------------------
+Description: Zip code of residence
+Type: float64
+Missing: 32 (3.3%)
+Non-missing: 936
+Mean: 50547.27
+Std: 27600.30
+Min: 1099.0
+Max: 99974.0
+
+
+vocational_qualification
+----------------------------------------
+Description: Vocational qualification (text)
+Type: object
+Missing: 15 (1.5%)
+Non-missing: 953
+Unique values: 28
+
+
+has_university_degree
+----------------------------------------
+Description: Has university degree (1=Yes, 0=No)
+Type: int64
+Missing: 0 (0.0%)
+Non-missing: 968
+Mean: 0.29
+Std: 0.45
+Min: 0
+Max: 1
+
+
+height_cm
+----------------------------------------
+Description: Height in centimeters
+Type: float64
+Missing: 31 (3.2%)
+Non-missing: 937
+Mean: 173.88
+Std: 9.56
+Min: 130.0
+Max: 213.0
+
+
+weight_kg
+----------------------------------------
+Description: Weight in kilograms
+Type: float64
+Missing: 31 (3.2%)
+Non-missing: 937
+Mean: 81.34
+Std: 19.89
+Min: 42.0
+Max: 160.0
+
+
+bmi
+----------------------------------------
+Description: Body Mass Index (calculated)
+Type: float64
+Missing: 31 (3.2%)
+Non-missing: 937
+Mean: 26.87
+Std: 6.60
+Min: 15.36970830966621
+Max: 94.67455621301774
+
+
+risk_tolerance
+----------------------------------------
+Description: Risk tolerance (0=not willing to 10=very willing)
+Type: float64
+Missing: 32 (3.3%)
+Non-missing: 936
+Mean: 4.51
+Std: 2.48
+Min: 0.0
+Max: 10.0
+
+
+personal_income_change
+----------------------------------------
+Description: Personal income change (-2=strongly decreased to +2=strongly increased)
+Type: float64
+Missing: 567 (58.6%)
+Non-missing: 401
+Mean: -0.15
+Std: 0.70
+Min: -2.0
+Max: 2.0
+
+
+partner_income_change
+----------------------------------------
+Description: Partner income change (-2=strongly decreased to +2=strongly increased)
+Type: float64
+Missing: 567 (58.6%)
+Non-missing: 401
+Mean: -0.07
+Std: 0.65
+Min: -2.0
+Max: 2.0
+
+
+task_share_food
+----------------------------------------
+Description: Personal share of food shopping/preparation (%)
+Type: float64
+Missing: 586 (60.5%)
+Non-missing: 382
+Mean: 59.53
+Std: 25.11
+Min: 0.0
+Max: 100.0
+
+
+task_share_childcare
+----------------------------------------
+Description: Personal share of childcare (%)
+Type: float64
+Missing: 823 (85.0%)
+Non-missing: 145
+Mean: 51.87
+Std: 31.60
+Min: 0.0
+Max: 100.0
+
+
+task_share_education
+----------------------------------------
+Description: Personal share of children's education (%)
+Type: float64
+Missing: 858 (88.6%)
+Non-missing: 110
+Mean: 55.15
+Std: 34.78
+Min: 0.0
+Max: 100.0
+
+
+task_share_housework
+----------------------------------------
+Description: Personal share of housework (%)
+Type: float64
+Missing: 585 (60.4%)
+Non-missing: 383
+Mean: 56.46
+Std: 24.85
+Min: 0.0
+Max: 100.0
+
+
+health_status
+----------------------------------------
+Description: Health status (1=Poor to 5=Very good)
+Type: float64
+Missing: 31 (3.2%)
+Non-missing: 937
+Mean: 3.43
+Std: 0.93
+Min: 1.0
+Max: 5.0
+
+
+health_status_cat
+----------------------------------------
+Description: Health status (categorical, German)
+Type: object
+Missing: 31 (3.2%)
+Non-missing: 937
+Unique values: 5
+Value counts:
+  Gut: 399
+  Zufriedenstellend: 306
+  Weniger gut: 111
+  Sehr gut: 90
+  Schlecht: 31
+
+
+household_income
+----------------------------------------
+Description: Monthly household net income (euros, midpoint)
+Type: float64
+Missing: 498 (51.4%)
+Non-missing: 470
+Mean: 3273.92
+Std: 1601.98
+Min: 5.0
+Max: 9250.5
+
+
+personal_income
+----------------------------------------
+Description: Monthly personal net income (euros, midpoint)
+Type: float64
+Missing: 502 (51.9%)
+Non-missing: 466
+Mean: 1973.09
+Std: 1270.75
+Min: 250.0
+Max: 6000.0
+
+
+household_income_cat
+----------------------------------------
+Description: Monthly household net income (categorical)
+Type: object
+Missing: 498 (51.4%)
+Non-missing: 470
+Unique values: 21
+
+
+personal_income_cat
+----------------------------------------
+Description: Monthly personal net income (categorical)
+Type: object
+Missing: 502 (51.9%)
+Non-missing: 466
+Unique values: 13
